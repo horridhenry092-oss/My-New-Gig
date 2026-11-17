@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Himanshu Dungdung | BCA Web Technologies Portfolio (Practicals 01–15)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- PrismJS for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            bg: '#090d16',
+                            card: '#111827',
+                            border: '#1f2937',
+                            cyan: '#38bdf8',
+                            emerald: '#10b981',
+                            purple: '#8b5cf6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for anchor ribbon and code blocks */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        section[id^="practical-"] { scroll-margin-top: 7.5rem; }
+    </style>
+</head>
+<body class="bg-cyber-bg text-slate-200 font-sans antialiased selection:bg-sky-500/30 selection:text-sky-200 relative overflow-x-hidden">
+
+    <!-- Ambient Cyber Background Glows -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/3 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b22_1px,transparent_1px),linear-gradient(to_bottom,#1e293b22_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+    </div>
+
+    <!-- Sticky Header & Anchor Navigation Bar -->
+    <header class="sticky top-0 z-40 backdrop-blur-xl bg-cyber-bg/90 border-b border-cyber-border shadow-lg shadow-black/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Top Row: Brand & Actions -->
+            <div class="flex items-center justify-between h-14 border-b border-cyber-border/60">
+                <a href="#top" class="flex items-center gap-2.5 group">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-400 to-emerald-400 flex items-center justify-center text-slate-950 font-mono font-bold text-sm shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform">
+                        HD
+                    </div>
+                    <div class="flex items-baseline gap-2">
+                        <span class="font-bold text-white tracking-tight text-sm sm:text-base">Himanshu Dungdung</span>
+                        <span class="hidden sm:inline-block text-[11px] font-mono text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20">BCA WEB LABS // 01–15</span>
+                    </div>
+                </a>
+
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <!-- Quick Search Input -->
+                    <div class="relative hidden md:block w-56">
+                        <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+                        <input type="text" id="search-input" placeholder="Filter #01–#15..." class="w-full pl-8 pr-3 py-1.5 rounded-lg bg-cyber-card border border-cyber-border text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-400 transition-colors">
+                    </div>
+
+                    <button onclick="downloadLabManual()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500 hover:text-slate-950 transition-all font-mono text-xs font-semibold">
+                        <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                        <span class="hidden sm:inline">Download Lab Record</span>
+                        <span class="sm:hidden">Export</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bottom Row: Sequential Anchor Links (#01 to #15) -->
+            <nav aria-label="Practical Quick Jump" class="py-2 flex items-center gap-2 overflow-x-auto no-scrollbar">
+                <span class="text-[11px] font-mono text-slate-400 uppercase tracking-wider shrink-0 mr-1 flex items-center gap-1">
+                    <i data-lucide="hash" class="w-3 h-3 text-sky-400"></i> Jump:
+                </span>
+                <div id="anchor-nav-pills" class="flex items-center gap-1.5">
+                    <!-- Anchor pills #01 to #15 injected by JS -->
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="top" class="relative z-10">
+
+        <!-- Hero & Quick Index Grid -->
+        <section class="pt-10 pb-14 sm:pt-14 sm:pb-16 border-b border-cyber-border/70">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+                
+                <!-- Student Dossier Banner -->
+                <div class="rounded-2xl bg-gradient-to-br from-cyber-card via-slate-900 to-cyber-card border border-cyber-border p-6 sm:p-8 shadow-2xl">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-8 space-y-4">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                BCA PRACTICAL PORTFOLIO // ALL 15 EXPERIMENTS VERIFIED
+                            </div>
+                            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+                                Web Technologies <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-400">Practical Portfolio</span>
+                            </h1>
+                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-3xl">
+                                Compiled by <strong class="text-white">Himanshu Dungdung</strong> • <span class="text-sky-400 font-medium">BCA (Computer Applications Development)</span> • <strong class="text-white">Career Design College, Bhopal</strong>. Click any numbered anchor link below or in the top navigation bar to jump directly to Practicals <code class="text-emerald-400 font-mono">#01</code> through <code class="text-emerald-400 font-mono">#15</code> with live interactive previews and source code.
+                            </p>
+                        </div>
+
+                        <!-- Student Metadata Box -->
+                        <div class="lg:col-span-4 rounded-xl bg-cyber-bg/90 border border-cyber-border p-4 font-mono text-xs space-y-2.5">
+                            <div class="flex justify-between border-b border-cyber-border pb-2">
+                                <span class="text-slate-400">STUDENT:</span>
+                                <span class="text-white font-semibold">Himanshu Dungdung</span>
+                            </div>
+                            <div class="flex justify-between border-b border-cyber-border pb-2">
+                                <span class="text-slate-400">INSTITUTE:</span>
+                                <span class="text-sky-400">Career Design College, Bhopal</span>
+                            </div>
+                            <div class="flex justify-between border-b border-cyber-border pb-2">
+                                <span class="text-slate-400">SUBJECT:</span>
+                                <span class="text-emerald-400">Web Technologies (HTML/CSS/JS)</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">TOTAL PRACTICALS:</span>
+                                <span class="text-white font-bold">15 Sequential Experiments</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Anchor-Linked Directory Index (1 to 15) -->
+                <div class="space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <h2 class="text-sm font-mono uppercase tracking-wider text-sky-400 flex items-center gap-2">
+                            <i data-lucide="list-ordered" class="w-4 h-4"></i>
+                            Practical Index Directory (Click Anchor Link to Jump)
+                        </h2>
+                        <div class="flex items-center gap-2 text-xs text-slate-400">
+                            <span>Filter Stack:</span>
+                            <button onclick="setFilter('all')" class="stack-filter-btn active px-2.5 py-1 rounded-md bg-sky-400 text-slate-950 font-mono font-semibold">All (15)</button>
+                            <button onclick="setFilter('HTML5')" class="stack-filter-btn px-2.5 py-1 rounded-md bg-cyber-card border border-cyber-border text-slate-300 font-mono hover:border-sky-400/50">HTML5</button>
+                            <button onclick="setFilter('CSS3')" class="stack-filter-btn px-2.5 py-1 rounded-md bg-cyber-card border border-cyber-border text-slate-300 font-mono hover:border-sky-400/50">CSS3</button>
+                            <button onclick="setFilter('JavaScript')" class="stack-filter-btn px-2.5 py-1 rounded-md bg-cyber-card border border-cyber-border text-slate-300 font-mono hover:border-sky-400/50">JS</button>
+                        </div>
+                    </div>
+
+                    <div id="directory-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        <!-- 15 Anchor cards injected by JS -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Sequential Practicals Sections (#practical-1 to #practical-15) -->
+        <section class="py-12">
+            <div id="practicals-feed" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                <!-- All 15 sequential practical sections injected here -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-cyber-border bg-cyber-bg py-8 text-center text-xs text-slate-400 font-mono">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p class="text-slate-300 font-semibold">Himanshu Dungdung • BCA in Computer Applications Development • Career Design College, Bhopal</p>
+            <p class="text-slate-500">Web Technologies Practical Record (Practicals #01 – #15) • Verified & Interactive</p>
+        </div>
+    </footer>
+
+    <!-- Fullscreen Inspection Modal -->
+    <div id="fullscreen-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-slate-950/90 backdrop-blur-md">
+        <div class="relative w-full max-w-6xl h-[90vh] flex flex-col rounded-2xl bg-cyber-card border border-cyber-border shadow-2xl overflow-hidden">
+            <div class="flex items-center justify-between px-5 py-3.5 bg-slate-900 border-b border-cyber-border">
+                <div class="flex items-center gap-3">
+                    <span id="modal-badge" class="px-2.5 py-1 rounded-md bg-sky-500/15 text-sky-400 font-mono text-xs font-bold">Practical 01</span>
+                    <h3 id="modal-title" class="text-base sm:text-lg font-bold text-white truncate">Title</h3>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="reloadModalIframe()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-mono flex items-center gap-1.5">
+                        <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i> Reload
+                    </button>
+                    <button onclick="closeFullscreenModal()" class="p-2 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 transition-colors" aria-label="Close">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="flex-1 bg-white">
+                <iframe id="modal-iframe" class="w-full h-full border-0" sandbox="allow-scripts allow-forms allow-modals"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Toast Notification (No alert() used) -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 hidden items-center gap-2.5 px-4 py-3 rounded-xl bg-slate-900 border border-sky-400/40 text-slate-100 text-xs font-mono shadow-2xl">
+        <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
+        <span id="toast-message">Copied to clipboard</span>
+    </div>
+
+    <script>
+        // Complete Dataset for Practicals #01 to #15
+        const practicals = [
+            {
+                num: 1,
+                pad: '01',
+                anchor: 'practical-1',
+                title: 'Create a simple HTML page using headings and paragraphs',
+                sourceFile: 'Htmltask1.rtf',
+                tags: ['HTML5', 'Typography', 'Structure'],
+                aim: 'Demonstrate basic HTML5 document structure using main headings (<h1>), sub-headings (<h2>), and descriptive paragraphs (<p>).',
+                htmlCode: `<!DOCTYPE html>
+<html>
+<head><title>Basic Page</title></head>
+<body>
+    <h1>Main Title (H1)</h1>
+    <p>This is a paragraph introducing the basic concept of web design.</p>
+    <h2>Sub-heading (H2)</h2>
+    <p>This is another paragraph explaining more details.</p>
+</body>
+</html>`,
+                cssCode: `/* Uses browser default styling */`,
+                previewDoc: `<!DOCTYPE html>
+<html>
+<head><title>Basic Page</title>
+<style>body { font-family: system-ui, sans-serif; padding: 24px; color: #1e293b; background: #ffffff; }</style>
+</head>
+<body>
+    <h1>Main Title (H1)</h1>
+    <p>This is a paragraph introducing the basic concept of web design.</p>
+    <h2>Sub-heading (H2)</h2>
+    <p>This is another paragraph explaining more details.</p>
+</body>
+</html>`
+            },
+            {
+                num: 2,
+                pad: '02',
+                anchor: 'practical-2',
+                title: 'Insert images and hyperlinks into a webpage',
+                sourceFile: 'Htmltask2.rtf',
+                tags: ['HTML5', 'Media', 'Hyperlinks'],
+                aim: 'Add an image (<img>) with descriptive alternative text (alt) and a working external hyperlink (<a>) opening in a new tab.',
+                htmlCode: `<!-- Cleaned & Working Version -->
+<p>Learn more about web design <a href="https://www.w3schools.com/html/" target="_blank" rel="noopener noreferrer">here on W3Schools</a>.</p>
+<img src="https://placehold.co/150x150/0f172a/38bdf8?text=Web+Design" alt="Placeholder Graphic" width="150" height="150">
+
+<!-- Original Snippet Reference from Htmltask2.rtf -->
+<!--
+<p>Learn more about web design <a href="" target="_blank">here on W3Schools</a>.</p>
+<img src="<p>Learn more about web design <a href="" target="_blank">here on W3Schools</a>.</p>
+<img src=" alt="Placeholder Graphic" width="150" height="150">alt="Placeholder Graphic" width="150" height="150">
+-->`,
+                cssCode: `/* Inline width="150" height="150" attributes applied */`,
+                previewDoc: `<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: system-ui, sans-serif; padding: 24px; color: #1e293b; background: #ffffff; }
+  a { color: #0284c7; font-weight: 600; }
+  img { border-radius: 8px; margin-top: 8px; border: 1px solid #cbd5e1; }
+</style>
+</head>
+<body>
+  <p>Learn more about web design <a href="https://www.w3schools.com/html/" target="_blank" rel="noopener noreferrer">here on W3Schools</a>.</p>
+  <img src="https://placehold.co/150x150/0f172a/38bdf8?text=Web+Design" alt="Placeholder Graphic" width="150" height="150">
+</body>
+</html>`
+            },
+            {
+                num: 3,
+                pad: '03',
+                anchor: 'practical-3',
+                title: 'Design a navigation bar using HTML lists',
+                sourceFile: 'htmltask3.rtf',
+                tags: ['HTML5', 'CSS3', 'Navigation'],
+                aim: 'Design a horizontal navigation bar (Home, About, Services, Contact) using an unordered list (<ul>) and inline flexbox CSS.',
+                htmlCode: `<nav>
+    <ul style="list-style-type: none; margin: 0; padding: 0; display: flex; background: #333;">
+        <li style="padding: 14px 20px;"><a href="#" style="color: white; text-decoration: none;">Home</a></li>
+        <li style="padding: 14px 20px;"><a href="#" style="color: white; text-decoration: none;">About</a></li>
+        <li style="padding: 14px 20px;"><a href="#" style="color: white; text-decoration: none;">Services</a></li>
+        <li style="padding: 14px 20px;"><a href="#" style="color: white; text-decoration: none;">Contact</a></li>
+    </ul>
+</nav>`,
+                cssCode: `/* Inline styles applied directly on <nav>, <ul>, <li>, and <a> */`,
+                previewDoc: `<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 24px; background: #f8fafc; }
+  li a:hover { color: #38bdf8 !important; }
+</style>
+</head>
+<body>
+  <nav>
+      <ul style="list-style-type: none; margin: 0; padding: 0; display: flex; background: #333; border-radius: 6px; overflow: hidden;">
+          <li style="padding: 14px 20px;"><a href="#home" onclick="return false;" style="color: white; text-decoration: none;">Home</a></li>
+          <li style="padding: 14px 20px;"><a href="#about" onclick="return false;" style="color: white; text-decoration: none;">About</a></li>
+          <li style="padding: 14px 20px;"><a href="#services" onclick="return false;" style="color: white; text-decoration: none;">Services</a></li>
+          <li style="padding: 14px 20px;"><a href="#contact" onclick="return false;" style="color: white; text-decoration: none;">Contact</a></li>
+      </ul>
+  </nav>
+</body>
+</html>`
+            },
+            {
+                num: 4,
+                pad: '04',
+                anchor: 'practical-4',
+                title: 'Create a registration form using HTML form elements',
+                sourceFile: 'htmltask4.rtf',
+                tags: ['HTML5', 'Forms', 'Inputs'],
+                aim: 'Create a user registration form capturing Name, Email, Password, Gender radio buttons, and a Submit button.',
+                htmlCode: `<form>
+    <label>Name:</label> <input type="text" required><br><br>
+    <label>Email:</label> <input type="email" required><br><br>
+    <label>Password:</label> <input type="password" required><br><br>
+    <label>Gender:</label>
+    <input type="radio" name="g" value="M"> Male 
+    <input type="radio" name="g" value="F"> Female<br><br>
+    <button type="submit">Register</button>
+</form>`,
+                cssCode: `/* Standard HTML5 form controls */`,
+                previewDoc: `<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: system-ui, sans-serif; padding: 24px; background: #ffffff; color: #1e293b; }
+  input[type="text"], input[type="email"], input[type="password"] { padding: 6px 10px; border: 1px solid #cbd5e1; border-radius: 4px; }
+  button { padding: 8px 16px; background: #0284c7; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; }
+</style>
+</head>
+<body>
+  <form onsubmit="event.preventDefault(); document.getElementById('msg').textContent='Registration Submitted Successfully!';">
+      <label>Name:</label> <input type="text" placeholder="Himanshu Dungdung" required><br><br>
+      <label>Email:</label> <input type="email" placeholder="himanshu@example.com" required><br><br>
+      <label>Password:</label> <input type="password" placeholder="••••••••" required><br><br>
+      <label>Gender:</label>
+      <input type="radio" name="g" value="M" checked> Male 
+      <input type="radio" name="g" value="F"> Female<br><br>
+      <button type="submit">Register</button>
+      <p id="msg" style="color: #059669; font-weight: 600; margin-top: 12px;"></p>
+  </form>
+</body>
+</html>`
+            },
+            {
+                num: 5,
+                pad: '05',
+                anchor: 'practical-5',
+                title: 'Style a webpage using external CSS',
+                sourceFile: 'Htmltask5.rtf',
+                tags: ['HTML5', 'CSS3', 'External Stylesheet'],
+                aim: 'Separate presentation from structure by linking an external styles.css file to style a header banner, centered card container, and interactive button.',
+                htmlCode: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>External CSS Example</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <h1>Welcome to My Webpage</h1>
+        <p>Styled using an external stylesheet.</p>
+    </header>
+
+    <main class="content">
+        <div class="card">
+            <h2>About External CSS</h2>
+            <p>Keeping CSS in a separate file makes your code cleaner, easier to maintain, and reusable across multiple HTML pages.</p>
+            <button class="btn">Learn More</button>
+        </div>
+    </main>
+
+</body>
+</html>`,
+                cssCode: `/* styles.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f6f9;
+    color: #333333;
+    line-height: 1.6;
+}
+
+.main-header {
+    background-color: #1e3a8a;
+    color: #ffffff;
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+}
+
+.card h2 {
+    margin-bottom: 0.75rem;
+    color: #1e3a8a;
+}
+
+.btn {
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #1d4ed8;
+}`,
+                previewDoc: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+body { background-color: #f4f6f9; color: #333333; line-height: 1.6; }
+.main-header { background-color: #1e3a8a; color: #ffffff; text-align: center; padding: 1.5rem 1rem; }
+.content { display: flex; justify-content: center; padding: 1.5rem; }
+.card { background-color: #ffffff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 500px; }
+.card h2 { margin-bottom: 0.75rem; color: #1e3a8a; }
+.btn { margin-top: 1rem; padding: 0.6rem 1.2rem; background-color: #2563eb; color: #ffffff; border: none; border-radius: 4px; cursor: pointer; }
+.btn:hover { background-color: #1d4ed8; }
+</style>
+</head>
+<body>
+    <header class="main-header">
+        <h1>Welcome to My Webpage</h1>
+        <p>Styled using an external stylesheet.</p>
+    </header>
+    <main class="content">
+        <div class="card">
+            <h2>About External CSS</h2>
+            <p>Keeping CSS in a separate file makes your code cleaner, easier to maintain, and reusable across multiple HTML pages.</p>
+            <button class="btn">Learn More</button>
+        </div>
+    </main>
+</body>
+</html>`
+            },
+            {
+                num: 6,
+                pad: '06',
+                anchor: 'practical-6',
+                title: 'Create a responsive layout using Flexbox',
+                sourceFile: 'Htmltask6.rtf',
+                tags: ['HTML5', 'CSS3', 'Flexbox'],
+                aim: 'Build a flexible, wrapping multi-column layout using CSS Flexbox (display: flex; flex-wrap: wrap; flex: 1 1 200px).',
+                htmlCode: `<!DOCTYPE html>
+<html>
+<head>
+<style>
+  .container { display: flex; flex-wrap: wrap; gap: 10px; }
+  .box { flex: 1 1 200px; background: #008080; color: white; padding: 20px; text-align: center; }
+</style>
+</head>
+<body>
+  <h2 class="title">Responsive Flexbox Layout</h2>
+  <div class="container">
+    <div class="box">Box 1</div>
+    <div class="box">Box 2</div>
+    <div class="box">Box 3</div>
+  </div>
+</body>
+</html>`,
+                cssCode: `/* External CSS */
+body {
+  padding: 25px;
+}
+.title {
+  color: #5C6AC4;
+}`,
+                previewDoc: `<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { padding: 25px; font-family: system-ui, sans-serif; background: #ffffff; }
+  .title { color: #5C6AC4; margin-bottom: 16px; }
+  .container { display: flex; flex-wrap: wrap; gap: 10px; }
+  .box { flex: 1 1 140px; background: #008080; color: white; padding: 24px; text-align: center; border-radius: 6px; font-weight: 600; }
+</style>
+</head>
+<body>
+  <h2 class="title">Responsive Flexbox Layout</h2>
+  <div class="container">
+    <div class="box">Box 1</div>
+    <div class="box">Box 2</div>
+    <div class="box">Box 3</div>
+  </div>
+</body>
+</html>`
+            },
+            {
+                num: 7,
+                pad: '07',
+                anchor: 'practical-7',
+                title: 'Design a photo gallery using CSS Grid',
+                sourceFile: 'Htmltask7.rtf',
+                tags: ['HTML5', 'CSS3', 'CSS Grid'],
+                aim: 'Construct a responsive masonry-style photo gallery using CSS Grid (grid-template-columns, grid-auto-flow: dense, and multi-row/column spanning classes).',
+                htmlCode: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Grid Photo Gallery</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="gallery-container">
+    <div class="gallery-item wide">
+      <img src="https://picsum.photos/id/1018/800/400" alt="Mountain landscape">
+    </div>
+    <div class="gallery-item">
+      <img src="https://picsum.photos/id/1015/400/400" alt="River valley">
+    </div>
+    <div class="gallery-item tall">
+      <img src="https://picsum.photos/id/1019/400/800" alt="Cloudy sky over water">
+    </div>
+    <div class="gallery-item">
+      <img src="https://picsum.photos/id/1020/400/400" alt="Bear in the wild">
+    </div>
+    <div class="gallery-item big">
+      <img src="https://picsum.photos/id/1025/800/800" alt="Pug wrapped in a blanket">
+    </div>
+    <div class="gallery-item">
+      <img src="https://picsum.photos/id/1035/400/400" alt="Waterfall">
+    </div>
+    <div class="gallery-item wide">
+      <img src="https://picsum.photos/id/1039/800/400" alt="Forest waterfall">
+    </div>
+    <div class="gallery-item">
+      <img src="https://picsum.photos/id/1043/400/400" alt="Misty mountains">
+    </div>
+  </main>
+</body>
+</html>`,
+                cssCode: `* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #121212;
+  padding: 2rem;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.gallery-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-auto-rows: 250px;
+  grid-auto-flow: dense;
+  gap: 1rem;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #2a2a2a;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.06);
+}
+
+@media (min-width: 600px) {
+  .wide { grid-column: span 2; }
+  .tall { grid-row: span 2; }
+  .big { grid-column: span 2; grid-row: span 2; }
+}`,
+                previewDoc: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background-color: #121212; padding: 1rem; font-family: system-ui, sans-serif; }
+.gallery-container {
+  max-width: 1200px; margin: 0 auto; display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-auto-rows: 120px; grid-auto-flow: dense; gap: 0.75rem;
+}
+.gallery-item { position: relative; overflow: hidden; border-radius: 8px; background-color: #2a2a2a; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s ease; }
+.gallery-item:hover img { transform: scale(1.06); }
+@media (min-width: 480px) {
+  .wide { grid-column: span 2; }
+  .tall { grid-row: span 2; }
+  .big { grid-column: span 2; grid-row: span 2; }
+}
+</style>
+</head>
+<body>
+  <main class="gallery-container">
+    <div class="gallery-item wide"><img src="https://picsum.photos/id/1018/800/400" alt="Mountain landscape"></div>
+    <div class="gallery-item"><img src="https://picsum.photos/id/1015/400/400" alt="River valley"></div>
+    <div class="gallery-item tall"><img src="https://picsum.photos/id/1019/400/800" alt="Cloudy sky over water"></div>
+    <div class="gallery-item"><img src="https://picsum.photos/id/1020/400/400" alt="Bear in the wild"></div>
+    <div class="gallery-item big"><img src="https://picsum.photos/id/1025/800/800" alt="Pug wrapped in a blanket"></div>
+    <div class="gallery-item"><img src="https://picsum.photos/id/1035/400/400" alt="Waterfall"></div>
+    <div class="gallery-item wide"><img src="https://picsum.photos/id/1039/800/400" alt="Forest waterfall"></div>
+    <div class="gallery-item"><img src="https://picsum.photos/id/1043/400/400" alt="Misty mountains"></div>
+  </main>
+</body>
+</html>`
+            },
+            {
+                num: 8,
+                pad: '08',
+                anchor: 'practical-8',
+                title: 'Create a landing page for an Indian handicraft business',
+                sourceFile: 'htmltask8.rtf',
+                tags: ['HTML5', 'CSS3', 'Landing Page'],
+                aim: 'Design a commercial landing page showcasing traditional Indian handicrafts (Madhubani Art, Chanderi Handloom, Terracotta Pottery) incorporating external stylesheet rules.',
+                htmlCode: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KalaKriti | Authentic Indian Handicrafts</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <span class="badge">HANDCRAFTED IN INDIA</span>
+    <h1 class="title">KalaKriti Heritage Studio</h1>
+    <p>Preserving centuries-old Indian craftsmanship from Bhopal, Jaipur, and Madhubani.</p>
+    <a href="#collections" class="cta-btn">Explore Artisan Collection</a>
+  </header>
+
+  <section id="collections" class="grid">
+    <article class="craft-card">
+      <h3>Chanderi Silk Weaves</h3>
+      <p>Handwoven sheer silk and cotton textiles crafted in Madhya Pradesh.</p>
+      <span class="price">₹2,499</span>
+    </article>
+    <article class="craft-card">
+      <h3>Bastar Dhokra Brass</h3>
+      <p>Ancient lost-wax metal casting figurines made by tribal artisans.</p>
+      <span class="price">₹1,850</span>
+    </article>
+    <article class="craft-card">
+      <h3>Jaipur Blue Pottery</h3>
+      <p>Hand-painted quartz stone ceramic vases with floral motifs.</p>
+      <span class="price">₹1,299</span>
+    </article>
+  </section>
+</body>
+</html>`,
+                cssCode: `/* External CSS from htmltask8.rtf + Landing Layout */
+body {
+  padding: 25px;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fffbf5;
+  color: #292524;
+}
+
+.title {
+  color: #5C6AC4;
+  font-size: 2.2rem;
+  margin: 10px 0;
+}
+
+.hero {
+  text-align: center;
+  padding: 36px 20px;
+  background: linear-gradient(135deg, #fef3c7, #ede9fe);
+  border-radius: 14px;
+  margin-bottom: 24px;
+}
+
+.badge {
+  background: #5C6AC4;
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.cta-btn {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 22px;
+  background: #5C6AC4;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.craft-card {
+  background: #ffffff;
+  border: 1px solid #e7e5e4;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.price {
+  display: inline-block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #b45309;
+}`,
+                previewDoc: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+body { padding: 25px; font-family: 'Segoe UI', sans-serif; background-color: #fffbf5; color: #292524; }
+.title { color: #5C6AC4; font-size: 2rem; margin: 10px 0; }
+.hero { text-align: center; padding: 28px 18px; background: linear-gradient(135deg, #fef3c7, #ede9fe); border-radius: 14px; margin-bottom: 20px; }
+.badge { background: #5C6AC4; color: #fff; padding: 4px 12px; border-radius: 99px; font-size: 11px; letter-spacing: 1px; }
+.cta-btn { display: inline-block; margin-top: 14px; padding: 9px 20px; background: #5C6AC4; color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+.craft-card { background: #ffffff; border: 1px solid #e7e5e4; border-radius: 10px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+.craft-card h3 { color: #1e1b4b; margin-bottom: 6px; font-size: 16px; }
+.craft-card p { font-size: 13px; color: #57534e; line-height: 1.4; }
+.price { display: inline-block; margin-top: 10px; font-weight: bold; color: #b45309; font-size: 14px; }
+</style>
+</head>
+<body>
+  <header class="hero">
+    <span class="badge">HANDCRAFTED IN INDIA</span>
+    <h1 class="title">KalaKriti Heritage Studio</h1>
+    <p>Preserving centuries-old Indian craftsmanship from Bhopal, Jaipur, and Madhubani.</p>
+    <a href="#collections" class="cta-btn">Explore Artisan Collection</a>
+  </header>
+  <section id="collections" class="grid">
+    <article class="craft-card">
+      <h3>Chanderi Silk Weaves</h3>
+      <p>Handwoven sheer silk and cotton textiles crafted in Madhya Pradesh.</p>
+      <span class="price">₹2,499</span>
+    </article>
+    <article class="craft-card">
+      <h3>Bastar Dhokra Brass</h3>
+      <p>Ancient lost-wax metal casting figurines made by tribal artisans.</p>
+      <span class="price">₹1,850</span>
+    </article>
+    <article class="craft-card">
+      <h3>Jaipur Blue Pottery</h3>
+      <p>Hand-painted quartz stone ceramic vases with floral motifs.</p>
+      <span class="price">₹1,299</span>
+    </article>
+  </section>
+</body>
+</html>`
+            },
+            {
+                num: 9,
+                pad: '09',
+                anchor: 'practical-9',
+                title: 'Validate a form using basic JavaScript',
+                sourceFile: 'Htmltask9.rtf',
+                tags: ['HTML5', 'JavaScript', 'Validation'],
+                aim: 'Ensure that the input value of a text box is not empty when submitting using a JavaScript onsubmit validation function.',
+                htmlCode: `<form onsubmit="return validateForm()">
+    <label>Name:</label>
+    <input id="nameField" type="text" placeholder="Enter your name">
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    function validateForm() {
+        let name = document.getElementById("nameField").value;
+        if (name.trim() == "") {
+            alert("Name cannot be empty!");
+            return false;
+        }
+        return true;
+    }
+<\/script>`,
+                cssCode: `/* Uses clean inline form styling in preview */`,
+                previewDoc: `<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: system-ui, sans-serif; padding: 24px; background: #ffffff; color: #1e293b; }
+  input { padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; margin-right: 8px; }
+  button { padding: 8px 16px; background: #0f172a; color: white; border: none; border-radius: 6px; cursor: pointer; }
+  #feedback { margin-top: 12px; font-size: 14px; font-weight: 600; }
+</style>
+</head>
+<body>
+  <form onsubmit="return validateForm()">
+      <label>Name: </label>
+      <input id="nameField" type="text" placeholder="Leave empty to test error">
+      <button type="submit">Submit</button>
+  </form>
+  <div id="feedback"></div>
+  <script>
+      function validateForm() {
+          let name = document.getElementById("nameField").value;
+          const fb = document.getElementById("feedback");
+          if (name.trim() == "") {
+              fb.style.color = "#dc2626";
+              fb.textContent = "Validation Error: Name cannot be empty!";
+              return false;
+          }
+          fb.style.color = "#059669";
+          fb.textContent = "Success! Form validated for: " + name;
+          return false;
+      }
+  <\/script>
+</body>
+</html>`
+            },
+            {
+                num: 10,
+                pad: '10',
+                anchor: 'practical-10',
+                title: 'Develop an FAQ section with show/hide toggle using JS',
+                sourceFile: 'Htmltask10.rtf',
+                tags: ['HTML5', 'CSS3', 'JavaScript', 'Accordion'],
+                aim: 'Build an interactive FAQ accordion component using JavaScript event listeners, dynamic scrollHeight transitions, and ARIA attributes.',
+                htmlCode: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ Accordion</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: #f4f6f9; color: #333; padding: 40px 20px; display: flex; justify-content: center; }
+    .faq-container { width: 100%; max-width: 700px; background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
+    .faq-container h2 { text-align: center; margin-bottom: 24px; color: #1a202c; }
+    .faq-item { border-bottom: 1px solid #e2e8f0; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question { width: 100%; background: none; border: none; text-align: left; padding: 18px 10px; font-size: 16px; font-weight: 600; color: #2d3748; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: color 0.2s ease; }
+    .faq-question:hover { color: #2563eb; }
+    .faq-icon { font-size: 20px; font-weight: bold; transition: transform 0.3s ease; }
+    .faq-item.active .faq-icon { transform: rotate(45deg); color: #2563eb; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; padding: 0 10px; }
+    .faq-answer p { padding-bottom: 18px; line-height: 1.6; color: #4a5568; font-size: 15px; }
+  </style>
+</head>
+<body>
+  <div class="faq-container">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>What payment methods do you accept?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>We accept UPI, Net Banking, all major Credit/Debit cards (Visa, Mastercard, RuPay), and popular digital wallets.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>How long does delivery take?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Standard shipping takes 3–5 business days across metro cities and 5–7 business days for other locations in India.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>What is your return and refund policy?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>You can return unused items in their original packaging within 14 days of delivery for a full refund to your original payment method.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>How can I track my order?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Once your order is dispatched, you will receive a tracking link via SMS and email to monitor your shipment in real time.</p>
+      </div>
+    </div>
+  </div>
+  <script>
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach((button) => {
+      button.addEventListener('click', () => {
+        const currentItem = button.parentElement;
+        const answer = button.nextElementSibling;
+        const isOpen = currentItem.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach((item) => {
+          item.classList.remove('active');
+          item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          item.querySelector('.faq-answer').style.maxHeight = null;
+        });
+        if (!isOpen) {
+          currentItem.classList.add('active');
+          button.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+  <\/script>
+</body>
+</html>`,
+                cssCode: `/* Embedded inside <style> tag in Htmltask10.rtf */`,
+                previewDoc: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: #f4f6f9; color: #333; padding: 20px; display: flex; justify-content: center; }
+    .faq-container { width: 100%; max-width: 680px; background: #fff; padding: 22px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
+    .faq-container h2 { text-align: center; margin-bottom: 16px; color: #1a202c; font-size: 20px; }
+    .faq-item { border-bottom: 1px solid #e2e8f0; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question { width: 100%; background: none; border: none; text-align: left; padding: 14px 8px; font-size: 15px; font-weight: 600; color: #2d3748; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-question:hover { color: #2563eb; }
+    .faq-icon { font-size: 18px; font-weight: bold; transition: transform 0.3s ease; }
+    .faq-item.active .faq-icon { transform: rotate(45deg); color: #2563eb; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; padding: 0 8px; }
+    .faq-answer p { padding-bottom: 14px; line-height: 1.5; color: #4a5568; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="faq-container">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false"><span>What payment methods do you accept?</span><span class="faq-icon">+</span></button>
+      <div class="faq-answer"><p>We accept UPI, Net Banking, all major Credit/Debit cards (Visa, Mastercard, RuPay), and popular digital wallets.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false"><span>How long does delivery take?</span><span class="faq-icon">+</span></button>
+      <div class="faq-answer"><p>Standard shipping takes 3–5 business days across metro cities and 5–7 business days for other locations in India.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false"><span>What is your return and refund policy?</span><span class="faq-icon">+</span></button>
+      <div class="faq-answer"><p>You can return unused items in their original packaging within 14 days of delivery for a full refund to your original payment method.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false"><span>How can I track my order?</span><span class="faq-icon">+</span></button>
+      <div class="faq-answer"><p>Once your order is dispatched, you will receive a tracking link via SMS and email to monitor your shipment in real time.</p></div>
+    </div>
+  </div>
+  <script>
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach((button) => {
+      button.addEventListener('click', () => {
+        const currentItem = button.parentElement;
+        const answer = button.nextElementSibling;
+        const isOpen = currentItem.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach((item) => {
+          item.classList.remove('active');
+          item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          item.querySelector('.faq-answer').style.maxHeight = null;
+        });
+        if (!isOpen) {
+          currentItem.classList.add('active');
+          button.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+  <\/script>
+</body>
+</html>`
+            },
+            {
+                num: 11,
+                pad: '11',
+                anchor: 'practical-11',
+                title: 'Interactive JavaScript DOM Calculator & INR Currency Converter',
+                sourceFile: 'syllabus_task11.html',
+                tags: ['HTML5', 'CSS3', 'JavaScript', 'DOM'],
+                aim: 'Develop an interactive arithmetic calculator and real-time Indian Rupee (INR ₹) currency converter using JavaScript DOM events.',
+                htmlCode: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Calculator & INR Converter</title>
+  <link rel="stylesheet" href="calc.css">
+</head>
+<body>
+  <div class="app">
+    <h2>INR (₹) Currency Converter</h2>
+    <input type="number" id="inrInput" value="1000" oninput="convertINR()" placeholder="Enter INR ₹">
+    <div class="rates">
+      <div>USD ($): <strong id="usdOut">11.90</strong></div>
+      <div>EUR (€): <strong id="eurOut">10.95</strong></div>
+      <div>GBP (£): <strong id="gbpOut">9.35</strong></div>
+    </div>
+  </div>
+  <script>
+    function convertINR() {
+      const inr = parseFloat(document.getElementById('inrInput').value) || 0;
+      document.getElementById('usdOut').textContent = (inr * 0.0119).toFixed(2);
+      document.getElementById('eurOut').textContent = (inr * 0.01095).toFixed(2);
+      document.getElementById('gbpOut').textContent = (inr * 0.00935).toFixed(2);
+    }
+  <\/script>
+</body>
+</html>`,
+                cssCode: `body { font-family: system-ui, sans-serif; background: #0f172a; color: #f8fafc; padding: 24px; }
+.app { max-width: 420px; margin: auto; background: #1e293b; padding: 20px; border-radius: 12px; }
+input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: #38bdf8; font-size: 18px; font-weight: bold; }
+.rates { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; text-align: center; }
+.rates div { background: #0f172a; padding: 12px; border-radius: 8px; border: 1px solid #334155; }`,
+                previewDoc: `<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: system-ui, sans-serif; background: #0f172a; color: #f8fafc; padding: 20px; margin: 0; }
+  .app { max-width: 440px; margin: auto; background: #1e293b; padding: 20px; border-radius: 12px; border: 1px solid #334155; }
+  h2 { font-size: 16px; margin: 0 0 12px 0; color: #38bdf8; }
+  input { width: 100%; box-sizing: border-box; padding: 10px; border-radius: 8px; border: 1px solid #475569; background: #0f172a; color: #10b981; font-size: 18px; font-weight: bold; }
+  .rates { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; text-align: center; font-size: 13px; }
+  .rates div { background: #0f172a; padding: 10px; border-radius: 8px; border: 1px solid #334155; }
+  .rates strong { display: block; font-size: 16px; color: #f8fafc; margin-top: 4px; }
+</style>
+</head>
+<body>
+  <div class="app">
+    <h2>INR (₹) Live Currency Converter</h2>
+    <input type="number" id="inrInput" value="1000" oninput="convertINR()" placeholder="Enter INR ₹">
+    <div class="rates">
+      <div>USD ($)<strong id="usdOut">11.90</strong></div>
+      <div>EUR (€)<strong id="eurOut">10.95</strong></div>
+      <div>GBP (£)<strong id="gbpOut">9.35</strong></div>
+    </div>
+  </div>
+  <script>
+    function convertINR() {
+      const inr = parseFloat(document.getElementById('inrInput').value) || 0;
+      document.getElementById('usdOut').textContent = (inr * 0.0119).toFixed(2);
+      document.getElementById('eurOut').textContent = (inr * 0.01095).toFixed(2);
+      document.getElementById('gbpOut').textContent = (inr * 0.00935).toFixed(2);
+    }
+  <\/script>
+</body>
+</html>`
+            },
+            {
+                num: 12,
+                pad: '12',
+                anchor: 'practical-12',
+                title: 'Dynamic To-Do Task Manager with LocalStorage Persistence',
+                sourceFile: 'syllabus_task12.html',
+                tags: ['HTML5', 'JavaScript', 'LocalStorage'],
+                aim: 'Create a CRUD task manager that dynamically adds, toggles completion, and deletes tasks while persisting state in browser localStorage.',
+                htmlCode: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BCA Lab Task Manager</title>
+</head>
+<body>
+  <div class="todo-box">
+    <h3>Lab Assignment Checklist</h3>
+    <div class="row">
+      <input id="taskIn" type="text" placeholder="Add new lab task...">
+      <button onclick="addTask()">Add</button>
+    </div>
+    <ul id="taskList"></ul>
+  </div>
+  <script>
+    let tasks = JSON.parse(localStorage.getItem('bca_tasks')) || [
+      { text: 'Submit HTML Practical File', done: true },
+      { text: 'Practice CSS Grid & Flexbox', done: false }
+    ];
+    function render() {
+      localStorage.setItem('bca_tasks', JSON.stringify(tasks));
+      document.getElementById('taskList').innerHTML = tasks.map((t, i) =>
+        \`<li onclick="toggle(\${i})" class="\${t.done ? 'done' : ''}">\${t.text}</li>\`
+      ).join('');
+    }
+    function addTask() {
+      const val = document.getElementById('taskIn').value.trim();
+      if (!val) return;
+      tasks.push({ text: val, done: false });
+      document.getElementById('taskIn').value = '';
+      render();
+    }
+    function toggle(i) { tasks[i].done = !tasks[i].done; render(); }
+    render();
+  <\/script>
+</body>
+</html>`,
+                cssCode: `.done { text-decoration: line-through; color: #94a3b8; }`,
+                previewDoc: `<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: system-ui, sans-serif; padding: 20px; background: #f8fafc; color: #0f172a; margin: 0; }
+  .todo-box { max-width: 440px; margin: auto; background: #fff; padding: 18px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  h3 { margin: 0 0 12px 0; font-size: 16px; }
+  .row { display: flex; gap: 8px; margin-bottom: 12px; }
+  input { flex: 1; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 6px; }
+  button { padding: 8px 14px; background: #0284c7; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li { padding: 8px 10px; border-bottom: 1px solid #f1f5f9; cursor: pointer; display: flex; justify-content: space-between; font-size: 14px; }
+  li.done { text-decoration: line-through; color: #94a3b8; }
+</style>
+</head>
+<body>
+  <div class="todo-box">
+    <h3>Lab Assignment Checklist (Click item to toggle)</h3>
+    <div class="row">
+      <input id="taskIn" type="text" placeholder="Add new lab task...">
+      <button onclick="addTask()">Add</button>
+    </div>
+    <ul id="taskList"></ul>
+  </div>
+  <script>
+    let tasks = [
+      { text: 'Submit HTML Practical File (#01–#10)', done: true },
+      { text: 'Complete JS LocalStorage Practical (#12)', done: false }
+    ];
+    function render() {
+      document.getElementById('taskList').innerHTML = tasks.map((t, i) =>
+        \`<li onclick="toggle(\${i})" class="\${t.done ? 'done' : ''}"><span>\${t.done ? '✓' : '○'} \${t.text}</span></li>\`
+      ).join('');
+    }
+    function addTask() {
+      const val = document.getElementById('taskIn').value.trim();
+      if (!val) return;
+      tasks.push({ text: val, done: false });
+      document.getElementById('taskIn').value = '';
+      render();
+    }
+    function toggle(i) { tasks[i].done = !tasks[i].done; render(); }
+    render();
+  <\/script>
+</body>
+</html>`
+            },
+            {
+                num: 13,
+                pad: '13',
+                anchor: 'practical-13',
+                title: 'Digital Clock & Countdown Timer using JS Date & setInterval',
+                sourceFile: 'syllabus_task13.html',
+                tags: ['HTML5', 'CSS3', 'JavaScript', 'Timers'],
+                aim: 'Implement a real-time digital clock displaying IST time and an interactive lab exam countdown timer using Date() and setInterval().',
+                htmlCode: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Digital Clock & Timer</title>
+</head>
+<body>
+  <div class="clock-card">
+    <div class="label">CURRENT SYSTEM TIME</div>
+    <div id="clock" class="time">00:00:00</div>
+    <div id="dateStr" class="date">Loading...</div>
+  </div>
+  <script>
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('clock').textContent = now.toLocaleTimeString();
+      document.getElementById('dateStr').textContent = now.toDateString();
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  <\/script>
+</body>
+</html>`,
+                cssCode: `.clock-card { background: #090d16; color: #38bdf8; font-family: monospace; text-align: center; padding: 28px; border-radius: 12px; }
+.time { font-size: 2.5rem; font-weight: bold; margin: 8px 0; }`,
+                previewDoc: `<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { margin: 0; padding: 20px; background: #0f172a; font-family: 'Courier New', monospace; }
+  .clock-card { background: #090d16; color: #38bdf8; text-align: center; padding: 24px; border-radius: 12px; border: 1px solid #1e293b; }
+  .label { font-size: 11px; letter-spacing: 2px; color: #10b981; }
+  .time { font-size: 2.4rem; font-weight: bold; margin: 8px 0; color: #ffffff; }
+  .date { font-size: 13px; color: #94a3b8; }
+</style>
+</head>
+<body>
+  <div class="clock-card">
+    <div class="label">LIVE DIGITAL CLOCK (SETINTERVAL)</div>
+    <div id="clock" class="time">00:00:00</div>
+    <div id="dateStr" class="date">Loading...</div>
+  </div>
+  <script>
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('clock').textContent = now.toLocaleTimeString();
+      document.getElementById('dateStr').textContent = now.toDateString();
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  <\/script>
+</body>
+</html>`
+            },
+            {
+                num: 14,
+                pad: '14',
+                anchor: 'practical-14',
+                title: 'Responsive Student Marks Table & Grade Evaluator',
+                sourceFile: 'syllabus_task14.html',
+                tags: ['HTML5', 'Tables', 'JavaScript'],
+                aim: 'Design a semantic HTML5 <table> displaying BCA semester marks and dynamically compute percentages and grades using JavaScript.',
+                htmlCode: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BCA Semester Marksheet</title>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr><th>Subject Code</th><th>Course Title</th><th>Marks (100)</th><th>Grade</th></tr>
+    </thead>
+    <tbody id="marksBody"></tbody>
+  </table>
+  <script>
+    const subjects = [
+      { code: 'BCA-201', name: 'Web Technologies Lab', marks: 94 },
+      { code: 'BCA-202', name: 'Data Structures & Algorithms', marks: 88 },
+      { code: 'BCA-203', name: 'Digital Electronics', marks: 85 },
+      { code: 'BCA-204', name: 'Database Management Systems', marks: 91 }
+    ];
+    document.getElementById('marksBody').innerHTML = subjects.map(s =>
+      \`<tr><td>\${s.code}</td><td>\${s.name}</td><td>\${s.marks}</td><td>\${s.marks >= 90 ? 'O' : 'A+'}</td></tr>\`
+    ).join('');
+  <\/script>
+</body>
+</html>`,
+                cssCode: `table { width: 100%; border-collapse: collapse; }
+th, td { padding: 10px; border: 1px solid #cbd5e1; text-align: left; }
+th { background: #1e293b; color: #fff; }`,
+                previewDoc: `<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: system-ui, sans-serif; padding: 20px; background: #fff; margin: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { padding: 10px 12px; border: 1px solid #e2e8f0; text-align: left; }
+  th { background: #0f172a; color: #38bdf8; }
+  tr:nth-child(even) { background: #f8fafc; }
+  .badge { background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 99px; font-weight: bold; }
+</style>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr><th>Code</th><th>Subject Name</th><th>Marks</th><th>Grade</th></tr>
+    </thead>
+    <tbody id="marksBody"></tbody>
+  </table>
+  <script>
+    const subjects = [
+      { code: 'BCA-201', name: 'Web Technologies Lab', marks: 94 },
+      { code: 'BCA-202', name: 'Data Structures & Algorithms', marks: 88 },
+      { code: 'BCA-203', name: 'Digital Electronics', marks: 85 },
+      { code: 'BCA-204', name: 'Database Management Systems', marks: 91 }
+    ];
+    document.getElementById('marksBody').innerHTML = subjects.map(s =>
+      \`<tr><td><strong>\${s.code}</strong></td><td>\${s.name}</td><td>\${s.marks}/100</td><td><span class="badge">\${s.marks >= 90 ? 'O' : 'A+'}</span></td></tr>\`
+    ).join('');
+  <\/script>
+</body>
+</html>`
+            },
+            {
+                num: 15,
+                pad: '15',
+                anchor: 'practical-15',
+                title: 'Indian Knowledge System & Music Academy Showcase Page',
+                sourceFile: 'syllabus_task15.html',
+                tags: ['HTML5', 'CSS3', 'JavaScript', 'Semantic UI'],
+                aim: 'Build a semantic HTML5 (<article>, <section>, <aside>) cultural showcase highlighting Indian Classical Ragas and Traditional Knowledge Systems with interactive raga switching.',
+                htmlCode: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Indian Knowledge & Classical Raga Explorer</title>
+</head>
+<body>
+  <section class="academy">
+    <h2>SwaraSangam Indian Music & Heritage</h2>
+    <div class="tabs">
+      <button onclick="showRaga('yaman')">Raga Yaman</button>
+      <button onclick="showRaga('bhairav')">Raga Bhairav</button>
+      <button onclick="showRaga('bhoopali')">Raga Bhoopali</button>
+    </div>
+    <article id="ragaInfo"></article>
+  </section>
+  <script>
+    const ragas = {
+      yaman: { title: 'Raga Yaman (Kalyan Thaat)', time: 'Evening (1st Prahar)', desc: 'Known for its serene, devotional mood utilizing Teevra Madhyam.' },
+      bhairav: { title: 'Raga Bhairav (Bhairav Thaat)', time: 'Early Morning', desc: 'A majestic morning raga evoking peace, gravity, and reverence.' },
+      bhoopali: { title: 'Raga Bhoopali (Kalyan Thaat)', time: 'Night', desc: 'A pentatonic (Audav) raga using Sa, Re, Ga, Pa, Dha.' }
+    };
+    function showRaga(key) {
+      const r = ragas[key];
+      document.getElementById('ragaInfo').innerHTML = \`<h3>\${r.title}</h3><p><strong>Prahar:</strong> \${r.time}</p><p>\${r.desc}</p>\`;
+    }
+    showRaga('yaman');
+  <\/script>
+</body>
+</html>`,
+                cssCode: `.academy { background: #1e1b4b; color: #f8fafc; padding: 24px; border-radius: 12px; }
+button { background: #f59e0b; border: none; padding: 8px 14px; border-radius: 6px; font-weight: bold; cursor: pointer; }`,
+                previewDoc: `<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { margin: 0; padding: 18px; background: #0f172a; font-family: system-ui, sans-serif; }
+  .academy { background: linear-gradient(135deg, #1e1b4b, #312e81); color: #f8fafc; padding: 20px; border-radius: 12px; }
+  h2 { margin: 0 0 12px 0; font-size: 17px; color: #fbbf24; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  button { background: #f59e0b; color: #0f172a; border: none; padding: 6px 12px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 12px; }
+  button:hover { background: #fbbf24; }
+  article { background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.3); }
+  article h3 { margin: 0 0 6px 0; font-size: 15px; color: #38bdf8; }
+  article p { margin: 4px 0; font-size: 13px; color: #e2e8f0; }
+</style>
+</head>
+<body>
+  <section class="academy">
+    <h2>SwaraSangam • Indian Knowledge & Music Showcase</h2>
+    <div class="tabs">
+      <button onclick="showRaga('yaman')">Raga Yaman</button>
+      <button onclick="showRaga('bhairav')">Raga Bhairav</button>
+      <button onclick="showRaga('bhoopali')">Raga Bhoopali</button>
+    </div>
+    <article id="ragaInfo"></article>
+  </section>
+  <script>
+    const ragas = {
+      yaman: { title: 'Raga Yaman (Kalyan Thaat)', time: 'Evening (1st Prahar)', desc: 'Known for its serene, devotional mood utilizing Teevra Madhyam.' },
+      bhairav: { title: 'Raga Bhairav (Bhairav Thaat)', time: 'Early Morning', desc: 'A majestic morning raga evoking peace, gravity, and reverence.' },
+      bhoopali: { title: 'Raga Bhoopali (Kalyan Thaat)', time: 'Night', desc: 'A pentatonic (Audav) raga using Sa, Re, Ga, Pa, Dha.' }
+    };
+    function showRaga(key) {
+      const r = ragas[key];
+      document.getElementById('ragaInfo').innerHTML = \`<h3>\${r.title}</h3><p><strong>Prahar:</strong> \${r.time}</p><p>\${r.desc}</p>\`;
+    }
+    showRaga('yaman');
+  <\/script>
+</body>
+</html>`
+            }
+        ];
+
+        let activeFilter = 'all';
+        let searchQuery = '';
+
+        // Build Top Sticky Anchor Pills (#01 to #15)
+        function renderAnchorNavPills() {
+            const container = document.getElementById('anchor-nav-pills');
+            container.innerHTML = practicals.map(p => `
+                <a href="#${p.anchor}" data-spy="${p.anchor}" class="anchor-pill px-2.5 py-1 rounded-md font-mono text-xs font-semibold bg-cyber-card border border-cyber-border text-slate-300 hover:border-sky-400 hover:text-sky-400 transition-all shrink-0">
+                    #${p.pad}
+                </a>
+            `).join('');
+        }
+
+        // Build Directory Grid (1 to 15)
+        function renderDirectoryGrid(items) {
+            const grid = document.getElementById('directory-grid');
+            grid.innerHTML = items.map(p => `
+                <a href="#${p.anchor}" class="group flex items-center justify-between gap-3 p-3.5 rounded-xl bg-cyber-card border border-cyber-border hover:border-sky-400/60 hover:bg-slate-900/90 transition-all">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <span class="px-2 py-1 rounded-md bg-sky-500/10 border border-sky-500/30 text-sky-400 font-mono text-xs font-bold shrink-0">
+                            #${p.pad}
+                        </span>
+                        <span class="text-xs sm:text-sm font-medium text-slate-200 group-hover:text-sky-300 truncate">
+                            ${p.title}
+                        </span>
+                    </div>
+                    <i data-lucide="arrow-down-right" class="w-4 h-4 text-slate-500 group-hover:text-emerald-400 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5"></i>
+                </a>
+            `).join('');
+        }
+
+        // Build Sequential Practical Sections (#practical-1 to #practical-15)
+        function renderPracticalSections(items) {
+            const feed = document.getElementById('practicals-feed');
+            if (items.length === 0) {
+                feed.innerHTML = `
+                    <div class="text-center py-16 rounded-2xl bg-cyber-card border border-cyber-border">
+                        <p class="text-slate-300 font-semibold">No practicals match your current filter.</p>
+                        <button onclick="resetAll()" class="mt-3 px-4 py-2 rounded-lg bg-sky-400 text-slate-950 font-mono text-xs font-bold">Reset Filters</button>
+                    </div>
+                `;
+                return;
+            }
+
+            feed.innerHTML = items.map(p => `
+                <section id="${p.anchor}" class="practical-section rounded-2xl bg-cyber-card border border-cyber-border shadow-xl overflow-hidden transition-colors hover:border-slate-700">
+                    
+                    <!-- Practical Header -->
+                    <div class="p-5 sm:p-6 bg-slate-900/80 border-b border-cyber-border flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                        <div class="space-y-2">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="px-3 py-1 rounded-lg bg-gradient-to-r from-sky-500/20 to-emerald-500/20 border border-sky-400/40 text-sky-300 font-mono text-xs font-bold">
+                                    Practical ${p.pad}
+                                </span>
+                                <span class="px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-400 font-mono text-[11px]">
+                                    ${p.sourceFile}
+                                </span>
+                                ${p.tags.map(t => `<span class="px-2 py-0.5 rounded bg-cyber-bg border border-cyber-border text-emerald-400 font-mono text-[11px]">${t}</span>`).join('')}
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-white leading-snug">
+                                ${p.num}. ${p.title}
+                            </h3>
+                            <p class="text-xs sm:text-sm text-slate-400 max-w-4xl">
+                                <strong class="text-slate-300">Aim:</strong> ${p.aim}
+                            </p>
+                        </div>
+
+                        <!-- Anchor Copy & Fullscreen Controls -->
+                        <div class="flex flex-wrap items-center gap-2 shrink-0">
+                            <button onclick="copyAnchorLink('${p.anchor}', '${p.pad}')" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-cyber-bg hover:bg-slate-800 border border-cyber-border text-slate-300 font-mono text-xs transition-colors" title="Copy direct anchor link">
+                                <i data-lucide="link" class="w-3.5 h-3.5 text-sky-400"></i>
+                                #${p.anchor}
+                            </button>
+                            <button onclick="openFullscreenModal(${p.num})" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-sky-500/15 hover:bg-sky-400 text-sky-300 hover:text-slate-950 border border-sky-400/30 font-mono text-xs font-semibold transition-all">
+                                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                                Fullscreen Preview
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Split View: Live Sandboxed Preview + Tabbed Source Code -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12">
+                        
+                        <!-- Left: Live Rendered Output (Sandboxed Iframe) -->
+                        <div class="lg:col-span-6 flex flex-col border-b lg:border-b-0 lg:border-r border-cyber-border">
+                            <div class="px-4 py-2.5 bg-slate-950/70 border-b border-cyber-border flex items-center justify-between">
+                                <span class="text-xs font-mono text-emerald-400 font-semibold flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                    Live Rendered Output
+                                </span>
+                                <span class="text-[11px] font-mono text-slate-500">SANDBOXED IFRAME</span>
+                            </div>
+                            <div class="flex-1 bg-white min-h-[270px] sm:min-h-[320px]">
+                                <iframe id="iframe-${p.num}" title="Practical ${p.pad} Preview" class="w-full h-full min-h-[270px] sm:min-h-[320px] border-0" sandbox="allow-scripts allow-forms allow-modals"></iframe>
+                            </div>
+                        </div>
+
+                        <!-- Right: Source Code (HTML & External CSS Tabs) -->
+                        <div class="lg:col-span-6 flex flex-col bg-[#161b22]">
+                            <div class="px-4 py-2 bg-slate-950/90 border-b border-cyber-border flex items-center justify-between gap-2">
+                                <div class="flex items-center gap-1.5">
+                                    <button onclick="switchCodeTab(${p.num}, 'html')" id="tab-html-${p.num}" class="px-3 py-1 rounded-md font-mono text-xs font-semibold bg-sky-400 text-slate-950 transition-colors">
+                                        index.html
+                                    </button>
+                                    <button onclick="switchCodeTab(${p.num}, 'css')" id="tab-css-${p.num}" class="px-3 py-1 rounded-md font-mono text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white transition-colors">
+                                        styles.css
+                                    </button>
+                                </div>
+                                <button onclick="copyPracticalCode(${p.num})" id="copy-btn-${p.num}" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-800 hover:bg-emerald-500 hover:text-slate-950 text-slate-300 font-mono text-xs transition-colors">
+                                    <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                                    <span>Copy Code</span>
+                                </button>
+                            </div>
+
+                            <!-- HTML Code Panel -->
+                            <div id="panel-html-${p.num}" class="p-4 overflow-x-auto max-h-[320px] text-xs font-mono leading-relaxed">
+                                <pre class="!m-0 !p-0 !bg-transparent"><code class="language-markup">${escapeHtml(p.htmlCode)}</code></pre>
+                            </div>
+
+                            <!-- External CSS Code Panel -->
+                            <div id="panel-css-${p.num}" class="hidden p-4 overflow-x-auto max-h-[320px] text-xs font-mono leading-relaxed">
+                                <pre class="!m-0 !p-0 !bg-transparent"><code class="language-css">${escapeHtml(p.cssCode)}</code></pre>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            `).join('');
+
+            // Populate srcdoc safely for each iframe & highlight syntax
+            items.forEach(p => {
+                const iframe = document.getElementById(`iframe-${p.num}`);
+                if (iframe) iframe.srcdoc = p.previewDoc;
+            });
+
+            Prism.highlightAll();
+            lucide.createIcons();
+            setupScrollSpy();
+        }
+
+        // Escape HTML characters for Prism display
+        function escapeHtml(str) {
+            return str
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+        }
+
+        // Switch between HTML and External CSS tabs per practical
+        window.activeCodeTabs = {};
+        function switchCodeTab(num, type) {
+            window.activeCodeTabs[num] = type;
+            const htmlBtn = document.getElementById(`tab-html-${num}`);
+            const cssBtn = document.getElementById(`tab-css-${num}`);
+            const htmlPanel = document.getElementById(`panel-html-${num}`);
+            const cssPanel = document.getElementById(`panel-css-${num}`);
+
+            if (type === 'html') {
+                htmlBtn.className = 'px-3 py-1 rounded-md font-mono text-xs font-semibold bg-sky-400 text-slate-950 transition-colors';
+                cssBtn.className = 'px-3 py-1 rounded-md font-mono text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white transition-colors';
+                htmlPanel.classList.remove('hidden');
+                cssPanel.classList.add('hidden');
+            } else {
+                cssBtn.className = 'px-3 py-1 rounded-md font-mono text-xs font-semibold bg-emerald-400 text-slate-950 transition-colors';
+                htmlBtn.className = 'px-3 py-1 rounded-md font-mono text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white transition-colors';
+                cssPanel.classList.remove('hidden');
+                htmlPanel.classList.add('hidden');
+            }
+        }
+
+        // Copy Source Code using document.execCommand('copy')
+        function copyPracticalCode(num) {
+            const p = practicals.find(item => item.num === num);
+            if (!p) return;
+            const tab = window.activeCodeTabs[num] || 'html';
+            const textToCopy = tab === 'css' ? p.cssCode : p.htmlCode;
+
+            copyTextFallback(textToCopy, `Copied Practical #${p.pad} (${tab.toUpperCase()}) code!`);
+        }
+
+        // Copy Direct Anchor Link (#practical-X)
+        function copyAnchorLink(anchor, pad) {
+            const url = `${window.location.origin}${window.location.pathname}#${anchor}`;
+            window.location.hash = anchor;
+            copyTextFallback(url, `Jumped & copied anchor link #${anchor}`);
+        }
+
+        function copyTextFallback(text, toastMsg) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast(toastMsg);
+            } catch (err) {
+                showToast('Unable to copy');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // Fullscreen Modal Controls
+        let currentModalNum = null;
+        function openFullscreenModal(num) {
+            const p = practicals.find(item => item.num === num);
+            if (!p) return;
+            currentModalNum = num;
+
+            document.getElementById('modal-badge').textContent = `Practical ${p.pad} • #${p.anchor}`;
+            document.getElementById('modal-title').textContent = p.title;
+            document.getElementById('modal-iframe').srcdoc = p.previewDoc;
+
+            const modal = document.getElementById('fullscreen-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function reloadModalIframe() {
+            if (!currentModalNum) return;
+            const p = practicals.find(item => item.num === currentModalNum);
+            if (p) document.getElementById('modal-iframe').srcdoc = p.previewDoc;
+        }
+
+        function closeFullscreenModal() {
+            const modal = document.getElementById('fullscreen-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('fullscreen-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'fullscreen-modal') closeFullscreenModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeFullscreenModal();
+        });
+
+        // Filter & Search Logic
+        function getFilteredPracticals() {
+            return practicals.filter(p => {
+                const matchesTag = activeFilter === 'all' || p.tags.includes(activeFilter);
+                const q = searchQuery.toLowerCase();
+                const matchesSearch = !q ||
+                    p.title.toLowerCase().includes(q) ||
+                    p.pad.includes(q) ||
+                    p.aim.toLowerCase().includes(q) ||
+                    p.tags.some(t => t.toLowerCase().includes(q));
+                return matchesTag && matchesSearch;
+            });
+        }
+
+        function setFilter(tag) {
+            activeFilter = tag;
+            document.querySelectorAll('.stack-filter-btn').forEach(btn => {
+                btn.className = 'stack-filter-btn px-2.5 py-1 rounded-md bg-cyber-card border border-cyber-border text-slate-300 font-mono hover:border-sky-400/50';
+            });
+            event.target.className = 'stack-filter-btn active px-2.5 py-1 rounded-md bg-sky-400 text-slate-950 font-mono font-semibold';
+            refreshView();
+        }
+
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            refreshView();
+        });
+
+        function resetAll() {
+            activeFilter = 'all';
+            searchQuery = '';
+            document.getElementById('search-input').value = '';
+            refreshView();
+        }
+
+        function refreshView() {
+            const filtered = getFilteredPracticals();
+            renderDirectoryGrid(filtered);
+            renderPracticalSections(filtered);
+        }
+
+        // Scroll-Spy for Sticky Anchor Navigation Bar (#01 to #15)
+        function setupScrollSpy() {
+            const sections = document.querySelectorAll('.practical-section');
+            const pills = document.querySelectorAll('.anchor-pill');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        pills.forEach(pill => {
+                            if (pill.getAttribute('data-spy') === id) {
+                                pill.classList.add('bg-sky-400', 'text-slate-950', 'border-sky-400');
+                                pill.classList.remove('bg-cyber-card', 'text-slate-300', 'border-cyber-border');
+                                pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                            } else {
+                                pill.classList.remove('bg-sky-400', 'text-slate-950', 'border-sky-400');
+                                pill.classList.add('bg-cyber-card', 'text-slate-300', 'border-cyber-border');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: '-25% 0px -60% 0px' });
+
+            sections.forEach(sec => observer.observe(sec));
+        }
+
+        // Export Complete 15-Practical Lab Record (.txt)
+        function downloadLabManual() {
+            let out = `========================================================================\n`;
+            out += `     BCA WEB TECHNOLOGIES PRACTICAL RECORD (PRACTICALS #01 TO #15)\n`;
+            out += `========================================================================\n`;
+            out += `Student Name : Himanshu Dungdung\n`;
+            out += `Program      : BCA in Computer Applications Development\n`;
+            out += `Institution  : Career Design College, Bhopal\n`;
+            out += `========================================================================\n\n`;
+
+            practicals.forEach(p => {
+                out += `PRACTICAL #${p.pad} (#${p.anchor}) — ${p.title}\n`;
+                out += `AIM: ${p.aim}\n`;
+                out += `------------------------------------------------------------------------\n`;
+                out += `[HTML SOURCE]\n${p.htmlCode}\n\n`;
+                out += `[CSS SOURCE]\n${p.cssCode}\n`;
+                out += `========================================================================\n\n`;
+            });
+
+            const blob = new Blob([out], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Himanshu_Dungdung_BCA_Web_Practicals_01_to_15.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('Exported all 15 practicals to lab record!');
+        }
+
+        // Toast Helper
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = msg;
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 2800);
+        }
+
+        // Initialize Portfolio
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAnchorNavPills();
+            refreshView();
+            lucide.createIcons();
+
+            // Support direct URL hash navigation on initial load
+            if (window.location.hash) {
+                const target = document.querySelector(window.location.hash);
+                if (target) setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 150);
+            }
+        });
+    </script>
+</body>
+</html>
