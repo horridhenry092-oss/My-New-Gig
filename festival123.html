@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UTSAV — A Tapestry of Indian Festivals</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            indigoDeep: '#0F0B29',
+            indigoCard: '#19133D',
+            saffron: '#FF6B1A',
+            marigold: '#FFB800',
+            crimson: '#D91E48',
+            goldLeaf: '#F3C65F',
+            ivorySilk: '#FFF9F0',
+            turmeric: '#F59E0B',
+            peacock: '#0D9488'
+          },
+          fontFamily: {
+            display: ['"Cinzel Decorative"', 'serif'],
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    
+    :root {
+      --bg-deep: #0F0B29;
+      --saffron: #FF6B1A;
+      --marigold: #FFB800;
+      --crimson: #D91E48;
+      --gold: #F3C65F;
+    }
+
+    body {
+      background-color: var(--bg-deep);
+      color: #FFF9F0;
+      overflow-x: hidden;
+    }
+    .mandala-bg {
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(255, 107, 26, 0.14) 0%, transparent 45%),
+        radial-gradient(circle at 80% 30%, rgba(217, 30, 72, 0.14) 0%, transparent 45%),
+        radial-gradient(circle at 50% 85%, rgba(255, 184, 0, 0.10) 0%, transparent 50%);
+    }
+
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes spinReverseSlow {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+
+    .animate-mandala-cw {
+      animation: spinSlow 48s linear infinite;
+    }
+    .animate-mandala-ccw {
+      animation: spinReverseSlow 64s linear infinite;
+    }
+
+    /* Glowing Diya Flame Flicker Effect */
+    @keyframes flickerFlame {
+      0%, 100% {
+        transform: scale(1) rotate(-2deg);
+        filter: drop-shadow(0 0 12px #FFB800) drop-shadow(0 0 24px #FF6B1A);
+      }
+      25% {
+        transform: scale(1.06, 0.96) rotate(2deg);
+        filter: drop-shadow(0 0 16px #FFD166) drop-shadow(0 0 32px #FF6B1A);
+      }
+      50% {
+        transform: scale(0.95, 1.07) rotate(-1deg);
+        filter: drop-shadow(0 0 10px #FFB800) drop-shadow(0 0 20px #D91E48);
+      }
+      75% {
+        transform: scale(1.04, 0.98) rotate(3deg);
+        filter: drop-shadow(0 0 18px #FFE082) drop-shadow(0 0 34px #FF6B1A);
+      }
+    }
+
+    .diya-flame {
+      transform-origin: 50% 90%;
+      animation: flickerFlame 2.4s ease-in-out infinite;
+    }
+
+    /* Ambient Halo Pulse */
+    @keyframes haloPulse {
+      0%, 100% { opacity: 0.45; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.15); }
+    }
+    .diya-halo {
+      animation: haloPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+      15% { opacity: 0.75; }
+      85% { opacity: 0.6; }
+      100% {
+        transform: translateY(-10vh) rotate(360deg) scale(1.1);
+        opacity: 0;
+      }
+    }
+    .floating-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+      animation: floatUp linear infinite;
+    }
+
+    /* 3D Perspective Card Tilt & Sheen Effect */
+    .festival-card-wrapper {
+      perspective: 1200px;
+    }
+
+    .festival-card {
+      transform-style: preserve-3d;
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease, border-color 0.45s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .festival-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        125deg,
+        transparent 20%,
+        rgba(255, 224, 130, 0.16) 45%,
+        rgba(255, 107, 26, 0.12) 55%,
+        transparent 80%
+      );
+      transform: translateX(-120%);
+      transition: transform 0.75s ease;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .festival-card:hover::before {
+      transform: translateX(120%);
+    }
+
+    .festival-card:hover {
+      box-shadow:
+        0 22px 45px -12px rgba(0, 0, 0, 0.75),
+        0 0 28px rgba(255, 184, 0, 0.24);
+      border-color: rgba(243, 198, 95, 0.65);
+    }
+
+    .festival-card .card-image {
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .festival-card:hover .card-image {
+      transform: scale(1.08);
+    }
+
+    /* Ornate Golden Border Divider */
+    .ornate-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(243, 198, 95, 0.7), rgba(255, 107, 26, 0.9), rgba(243, 198, 95, 0.7), transparent);
+    }
+
+    /* Scroll Reveal Utility */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 9px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0F0B29;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #FF6B1A, #D91E48);
+      border-radius: 9999px;
+    }
+
+    
+    @keyframes modalZoomIn {
+      from {
+        opacity: 0;
+        transform: scale(0.94) translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    .modal-animate {
+      animation: modalZoomIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased mandala-bg selection:bg-saffron selection:text-white">
+
+ 
+  <div id="particle-container" aria-hidden="true"></div>
+
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-indigoDeep/80 border-b border-goldLeaf/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+      <!-- Brand Emblem with Glowing Mini Diya -->
+      <a href="#top" class="flex items-center gap-3 group">
+        <div class="relative w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-saffron/20 to-crimson/20 border border-goldLeaf/40">
+          <svg class="w-7 h-7" viewBox="0 0 64 64" fill="none">
+            <ellipse cx="32" cy="24" rx="14" ry="16" fill="#FFB800" opacity="0.25" class="diya-halo" />
+            <path class="diya-flame" d="M32 8C32 8 23 19 23 26C23 31 27 34 32 34C37 34 41 31 41 26C41 19 32 8 32 8Z" fill="url(#flameGradNav)" />
+            <path d="M12 36C14 48 22 54 32 54C42 54 50 48 52 36C44 40 20 40 12 36Z" fill="url(#clayGradNav)" />
+            <defs>
+              <linearGradient id="flameGradNav" x1="32" y1="8" x2="32" y2="34" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FFF7CC" />
+                <stop offset="0.5" stop-color="#FFB800" />
+                <stop offset="1" stop-color="#FF6B1A" />
+              </linearGradient>
+              <linearGradient id="clayGradNav" x1="12" y1="36" x2="52" y2="54" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#D91E48" />
+                <stop offset="1" stop-color="#8C1D40" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div>
+          <span class="font-display text-xl sm:text-2xl font-bold tracking-wider bg-gradient-to-r from-goldLeaf via-marigold to-saffron bg-clip-text text-transparent">
+            UTSAV
+          </span>
+          <span class="hidden sm:block text-[11px] uppercase tracking-[0.25em] text-ivorySilk/60 -mt-1">
+            Sacred Festivals of India
+          </span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-ivorySilk/80">
+        <a href="#festivals-showcase" class="hover:text-marigold transition-colors">Festivals</a>
+        <a href="#seasonal-calendar" class="hover:text-marigold transition-colors">Seasonal Rhythm</a>
+        <a href="#cultural-essence" class="hover:text-marigold transition-colors">Traditions</a>
+      </nav>
+
+     
+      <a href="#festivals-showcase"
+         class="px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-gradient-to-r from-saffron to-crimson text-white shadow-lg shadow-saffron/25 hover:shadow-marigold/40 hover:scale-105 transition-all">
+        Explore Celebrations
+      </a>
+    </div>
+  </header>
+  <section id="top" class="relative overflow-hidden pt-12 pb-20 sm:pt-20 sm:pb-28 lg:pt-24 lg:pb-32">
+    <!-- Giant Rotating Decorative Rangoli Mandala Behind Hero -->
+    <div class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-20" aria-hidden="true">
+      <svg class="w-[680px] h-[680px] sm:w-[880px] sm:h-[880px] animate-mandala-cw" viewBox="0 0 400 400" fill="none">
+        <circle cx="200" cy="200" r="190" stroke="#F3C65F" stroke-width="1" stroke-dasharray="6 6" />
+        <circle cx="200" cy="200" r="160" stroke="#FF6B1A" stroke-width="1.2" />
+        <circle cx="200" cy="200" r="125" stroke="#FFB800" stroke-width="0.8" stroke-dasharray="3 5" />
+        <g stroke="#F3C65F" stroke-width="0.9">
+          <polygon points="200,15 245,155 385,200 245,245 200,385 155,245 15,200 155,155" />
+          <polygon points="200,15 245,155 385,200 245,245 200,385 155,245 15,200 155,155" transform="rotate(45 200 200)" />
+          <polygon points="200,45 232,168 355,200 232,232 200,355 168,232 45,200 168,168" transform="rotate(22.5 200 200)" stroke="#D91E48" />
+        </g>
+      </svg>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigoCard/90 border border-goldLeaf/30 text-goldLeaf text-xs sm:text-sm font-medium mb-6 shadow-md">
+        <span class="w-2 h-2 rounded-full bg-marigold animate-ping"></span>
+        <span>Colors • Lights • Harvest • Devotion</span>
+      </div>
+
+      <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-tight max-w-5xl mx-auto">
+        <span class="block text-ivorySilk">A Tapestry of</span>
+        <span class="bg-gradient-to-r from-marigold via-saffron to-crimson bg-clip-text text-transparent">
+          Indian Festivals
+        </span>
+      </h1>
+
+      <p class="mt-6 max-w-2xl mx-auto text-base sm:text-xl text-ivorySilk/80 font-normal leading-relaxed">
+        Journey across India’s vibrant cultural landscape—from the golden glow of Diwali lamps and springtime splashes of Holi to sacred harvests, rhythmic Garba nights, and grand processions.
+      </p>
+      <div class="mt-10 flex items-center justify-center gap-6 sm:gap-10">
+        <div class="hidden sm:block w-28 ornate-divider"></div>
+
+        <!-- Custom Animated CSS/SVG Diya Trio -->
+        <div class="flex items-end gap-5 px-6 py-3 rounded-2xl bg-indigoCard/70 border border-goldLeaf/25 backdrop-blur-sm shadow-xl">
+          <!-- Left Small Diya -->
+          <svg class="w-9 h-9" viewBox="0 0 64 64" fill="none" aria-label="Glowing Diya">
+            <circle cx="32" cy="24" r="16" fill="#FFB800" opacity="0.22" class="diya-halo" />
+            <path class="diya-flame" style="animation-delay: 0.4s" d="M32 10C32 10 24 20 24 26C24 30.5 27.5 34 32 34C36.5 34 40 30.5 40 26C40 20 32 10 32 10Z" fill="#FFB800" />
+            <path d="M14 37C16 48 23 53 32 53C41 53 48 48 50 37C42 40.5 22 40.5 14 37Z" fill="#FF6B1A" />
+          </svg>
+
+          
+          <svg class="w-12 h-12" viewBox="0 0 64 64" fill="none" aria-label="Grand Glowing Diya">
+            <circle cx="32" cy="22" r="20" fill="#FF6B1A" opacity="0.28" class="diya-halo" />
+            <path class="diya-flame" d="M32 6C32 6 22 18 22 25.5C22 31 26.5 35 32 35C37.5 35 42 31 42 25.5C42 18 32 6 32 6Z" fill="url(#heroFlame)" />
+            <path d="M10 37C13 50 21 56 32 56C43 56 51 50 54 37C44 41.5 20 41.5 10 37Z" fill="url(#heroBowl)" />
+            <path d="M13 38C22 41.5 42 41.5 51 38" stroke="#F3C65F" stroke-width="2" stroke-linecap="round" />
+            <defs>
+              <linearGradient id="heroFlame" x1="32" y1="6" x2="32" y2="35" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FFFFFF" />
+                <stop offset="0.45" stop-color="#FFD166" />
+                <stop offset="1" stop-color="#FF6B1A" />
+              </linearGradient>
+              <linearGradient id="heroBowl" x1="10" y1="37" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#D91E48" />
+                <stop offset="1" stop-color="#7A1332" />
+              </linearGradient>
+            </defs>
+          </svg>
+
+   
+          <svg class="w-9 h-9" viewBox="0 0 64 64" fill="none" aria-label="Glowing Diya">
+            <circle cx="32" cy="24" r="16" fill="#FFB800" opacity="0.22" class="diya-halo" />
+            <path class="diya-flame" style="animation-delay: 0.9s" d="M32 10C32 10 24 20 24 26C24 30.5 27.5 34 32 34C36.5 34 40 30.5 40 26C40 20 32 10 32 10Z" fill="#FFB800" />
+            <path d="M14 37C16 48 23 53 32 53C41 53 48 48 50 37C42 40.5 22 40.5 14 37Z" fill="#FF6B1A" />
+          </svg>
+        </div>
+
+        <div class="hidden sm:block w-28 ornate-divider"></div>
+      </div>
+
+     
+      <div class="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <div class="p-4 rounded-2xl bg-indigoCard/60 border border-goldLeaf/15 backdrop-blur-sm">
+          <div class="font-display text-2xl sm:text-3xl font-bold text-marigold">8</div>
+          <div class="text-xs sm:text-sm text-ivorySilk/70 mt-1">Iconic Festivals</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-indigoCard/60 border border-goldLeaf/15 backdrop-blur-sm">
+          <div class="font-display text-2xl sm:text-3xl font-bold text-saffron">28+</div>
+          <div class="text-xs sm:text-sm text-ivorySilk/70 mt-1">Regional Traditions</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-indigoCard/60 border border-goldLeaf/15 backdrop-blur-sm">
+          <div class="font-display text-2xl sm:text-3xl font-bold text-crimson">4</div>
+          <div class="text-xs sm:text-sm text-ivorySilk/70 mt-1">Sacred Seasons</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-indigoCard/60 border border-goldLeaf/15 backdrop-blur-sm">
+          <div class="font-display text-2xl sm:text-3xl font-bold text-goldLeaf">32+</div>
+          <div class="text-xs sm:text-sm text-ivorySilk/70 mt-1">Festive Delicacies</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="festivals-showcase" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+    <!-- Section Heading -->
+    <div class="text-center max-w-3xl mx-auto mb-10 reveal-on-scroll">
+      <p class="text-xs uppercase tracking-[0.3em] text-marigold font-semibold mb-2">Interactive Showcase</p>
+      <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ivorySilk">
+        Major Celebrations of India
+      </h2>
+      <p class="mt-3 text-ivorySilk/75 text-sm sm:text-base">
+        Filter by theme or season, hover over any card to experience 3D tilt &amp; golden sheen, and click to open its full cultural story.
+      </p>
+    </div>
+
+    <!-- Filter Controls Bar -->
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-10 p-4 rounded-2xl bg-indigoCard/80 border border-goldLeaf/20 backdrop-blur-md reveal-on-scroll">
+      
+      <div id="filter-buttons" class="flex flex-wrap items-center justify-center gap-2" role="tablist" aria-label="Filter festivals by theme">
+        <button data-filter="all" class="filter-btn active px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-gradient-to-r from-saffron to-crimson text-white shadow-md">
+          All Festivals (8)
+        </button>
+        <button data-filter="lights-colors" class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-indigoDeep/70 text-ivorySilk/80 hover:text-white border border-goldLeaf/20">
+          Lights &amp; Colors
+        </button>
+        <button data-filter="harvest" class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-indigoDeep/70 text-ivorySilk/80 hover:text-white border border-goldLeaf/20">
+          Harvest &amp; Gratitude
+        </button>
+        <button data-filter="devotion" class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-indigoDeep/70 text-ivorySilk/80 hover:text-white border border-goldLeaf/20">
+          Devotion &amp; Heritage
+        </button>
+      </div>
+
+      <div class="relative w-full md:w-64">
+        <input
+          id="festival-search"
+          type="text"
+          placeholder="Search festival, region, food..."
+          aria-label="Search festivals"
+          class="w-full pl-10 pr-4 py-2 rounded-full bg-indigoDeep/90 border border-goldLeaf/25 text-sm text-ivorySilk placeholder-ivorySilk/45 focus:outline-none focus:border-marigold transition-colors"
+        />
+        <svg class="w-4 h-4 text-goldLeaf/70 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+    </div>
+
+    <div id="festivals-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
+      
+    </div>
+
+    <div id="empty-state" class="hidden text-center py-16 px-4 rounded-3xl bg-indigoCard/50 border border-goldLeaf/20 mt-6">
+      <p class="font-serif text-2xl text-goldLeaf">No festivals matched your filter.</p>
+      <p class="text-sm text-ivorySilk/70 mt-2">Try clearing your search or selecting "All Festivals".</p>
+      <button id="reset-filters-btn" class="mt-4 px-5 py-2 rounded-full bg-saffron text-white text-sm font-semibold hover:bg-crimson transition-colors">
+        Reset Filters
+      </button>
+    </div>
+
+    <section id="seasonal-calendar" class="mt-28 reveal-on-scroll">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <p class="text-xs uppercase tracking-[0.3em] text-saffron font-semibold mb-2">Annual Cycle</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-ivorySilk">The Rhythm of Indian Seasons</h2>
+        <p class="mt-3 text-sm sm:text-base text-ivorySilk/75">
+          Indian festivals follow ancient lunar-solar calendars, aligning human joy with harvest cycles and changing skies.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="p-6 rounded-3xl bg-gradient-to-b from-indigoCard to-indigoDeep border border-goldLeaf/20 hover:border-marigold/60 transition-all">
+          <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-marigold/20 text-marigold mb-4">Winter • Jan – Feb</span>
+          <h3 class="font-serif text-2xl font-bold text-ivorySilk">Sun &amp; Harvest</h3>
+          <p class="text-sm text-ivorySilk/70 mt-2 leading-relaxed">
+            Marked by <strong class="text-goldLeaf">Pongal</strong> and Makar Sankranti, thanking the Sun God for abundant winter crops with sweet rice and kite-filled skies.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-gradient-to-b from-indigoCard to-indigoDeep border border-goldLeaf/20 hover:border-crimson/60 transition-all">
+          <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-crimson/20 text-rose-300 mb-4">Spring • Mar – Apr</span>
+          <h3 class="font-serif text-2xl font-bold text-ivorySilk">Blossoms &amp; Colors</h3>
+          <p class="text-sm text-ivorySilk/70 mt-2 leading-relaxed">
+            <strong class="text-goldLeaf">Holi</strong> heralds spring’s arrival with clouds of gulal, folk songs, and renewal, alongside springtime crescent moon celebrations.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-gradient-to-b from-indigoCard to-indigoDeep border border-goldLeaf/20 hover:border-peacock/60 transition-all">
+          <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-teal-500/20 text-teal-300 mb-4">Monsoon • Aug – Sep</span>
+          <h3 class="font-serif text-2xl font-bold text-ivorySilk">Emerald Abundance</h3>
+          <p class="text-sm text-ivorySilk/70 mt-2 leading-relaxed">
+            Lush rains usher in <strong class="text-goldLeaf">Onam</strong> flower carpets in Kerala and the rhythmic drums of <strong class="text-goldLeaf">Ganesh Chaturthi</strong> across Maharashtra.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-gradient-to-b from-indigoCard to-indigoDeep border border-goldLeaf/20 hover:border-saffron/60 transition-all">
+          <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-saffron/20 text-orange-300 mb-4">Autumn • Oct – Nov</span>
+          <h3 class="font-serif text-2xl font-bold text-ivorySilk">Triumph &amp; Radiance</h3>
+          <p class="text-sm text-ivorySilk/70 mt-2 leading-relaxed">
+            The grand crescendo of <strong class="text-goldLeaf">Navratri</strong>, <strong class="text-goldLeaf">Durga Puja</strong>, and <strong class="text-goldLeaf">Diwali</strong> illuminates cities with artistry, dance, and millions of lamps.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  
+    <section id="cultural-essence" class="mt-24 p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-indigoCard via-[#23194F] to-indigoCard border border-goldLeaf/25 relative overflow-hidden reveal-on-scroll">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+        <div class="lg:col-span-2">
+          <p class="text-xs uppercase tracking-[0.3em] text-goldLeaf font-semibold mb-2">Shared Heritage</p>
+          <h2 class="font-display text-2xl sm:text-4xl font-bold text-ivorySilk">
+            Where Art, Devotion &amp; Hospitality Meet
+          </h2>
+          <p class="mt-4 text-ivorySilk/80 text-sm sm:text-base leading-relaxed">
+            Whether drawing intricate <em>Kolam</em> and <em>Pookalam</em> patterns at dawn, sharing warm bowls of <em>Sheer Khurma</em> and <em>Payasam</em> with neighbors, or lighting clay <em>Diyas</em> along courtyards, every Indian festival transforms everyday spaces into living works of art.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-indigoDeep/80 border border-goldLeaf/30 text-goldLeaf">✦ Sacred Geometry &amp; Rangoli</span>
+            <span class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-indigoDeep/80 border border-goldLeaf/30 text-marigold">✦ Traditional Culinary Feasts</span>
+            <span class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-indigoDeep/80 border border-goldLeaf/30 text-saffron">✦ Classical Music &amp; Folk Dance</span>
+          </div>
+        </div>
+
+        <!-- Decorative Rotating Rangoli Emblem -->
+        <div class="flex justify-center">
+          <div class="relative w-48 h-48 sm:w-56 sm:h-56 flex items-center justify-center">
+            <svg class="w-full h-full animate-mandala-ccw" viewBox="0 0 200 200" fill="none">
+              <circle cx="100" cy="100" r="92" stroke="#F3C65F" stroke-width="1.5" stroke-dasharray="4 4" />
+              <circle cx="100" cy="100" r="72" stroke="#FF6B1A" stroke-width="1.5" />
+              <circle cx="100" cy="100" r="48" stroke="#D91E48" stroke-width="1.5" />
+              <g fill="#FFB800" opacity="0.85">
+                <circle cx="100" cy="14" r="4" />
+                <circle cx="100" cy="186" r="4" />
+                <circle cx="14" cy="100" r="4" />
+                <circle cx="186" cy="100" r="4" />
+                <circle cx="39" cy="39" r="4" />
+                <circle cx="161" cy="161" r="4" />
+                <circle cx="161" cy="39" r="4" />
+                <circle cx="39" cy="161" r="4" />
+              </g>
+              <polygon points="100,24 122,78 176,100 122,122 100,176 78,122 24,100 78,78" stroke="#F3C65F" stroke-width="1.2" fill="rgba(255,107,26,0.12)" />
+            </svg>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="font-display text-sm tracking-widest text-goldLeaf uppercase">Unity</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  
+  <footer class="border-t border-goldLeaf/20 bg-indigoDeep/95 py-10 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div>
+        <span class="font-display text-lg font-bold text-goldLeaf">UTSAV</span>
+        <p class="text-xs text-ivorySilk/60 mt-1">Celebrating the vibrant spirit, colors, and heritage of Indian festivals.</p>
+      </div>
+      <div class="text-xs text-ivorySilk/55">
+        Crafted with CSS 3D Transforms, Keyframe Animations &amp; Responsive Design
+      </div>
+    </div>
+  </footer>
+
+  <div
+    id="festival-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md overflow-y-auto"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+  >
+    <div class="modal-animate relative w-full max-w-4xl rounded-3xl bg-indigoCard border border-goldLeaf/40 shadow-2xl overflow-hidden my-auto">
+      <!-- Close Button -->
+      <button
+        id="close-modal-btn"
+        aria-label="Close festival details"
+        class="absolute top-4 right-4 z-30 w-10 h-10 rounded-full bg-indigoDeep/85 border border-goldLeaf/40 text-ivorySilk hover:bg-crimson hover:text-white flex items-center justify-center transition-colors"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12">
+        <!-- Left Artwork / Photo Column -->
+        <div class="lg:col-span-5 relative min-h-[260px] sm:min-h-[340px] lg:min-h-full bg-indigoDeep">
+          <div id="modal-media-container" class="w-full h-full"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-indigoCard via-transparent to-black/30 lg:bg-gradient-to-r lg:from-transparent lg:to-indigoCard/40 pointer-events-none"></div>
+          <div class="absolute bottom-4 left-4 right-4 z-10">
+            <span id="modal-season-badge" class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-saffron text-white shadow">
+              Autumn
+            </span>
+            <p id="modal-region-label" class="mt-2 text-xs uppercase tracking-widest text-goldLeaf font-semibold">
+              Pan-India
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Rich Cultural Details Column -->
+        <div class="lg:col-span-7 p-6 sm:p-8 max-h-[82vh] overflow-y-auto">
+          <p id="modal-subtitle" class="text-xs uppercase tracking-[0.25em] text-marigold font-semibold">
+            Festival of Lights
+          </p>
+          <h3 id="modal-title" class="font-display text-2xl sm:text-4xl font-bold text-ivorySilk mt-1">
+            Diwali
+          </h3>
+
+          <div class="ornate-divider my-4"></div>
+
+          <!-- Story & Significance -->
+          <div class="space-y-4 text-sm sm:text-base text-ivorySilk/85 leading-relaxed">
+            <div>
+              <h4 class="font-serif text-xl font-bold text-goldLeaf mb-1">Story &amp; Significance</h4>
+              <p id="modal-story"></p>
+            </div>
+
+            <!-- Key Traditions -->
+            <div>
+              <h4 class="font-serif text-xl font-bold text-goldLeaf mb-2">Cherished Traditions</h4>
+              <ul id="modal-traditions" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm"></ul>
+            </div>
+
+            <!-- Festive Foods -->
+            <div>
+              <h4 class="font-serif text-xl font-bold text-goldLeaf mb-2">Festive Delicacies</h4>
+              <div id="modal-foods" class="flex flex-wrap gap-2"></div>
+            </div>
+          </div>
+
+          <!-- Modal Footer Navigation -->
+          <div class="mt-7 pt-4 border-t border-goldLeaf/20 flex items-center justify-between gap-3">
+            <button id="prev-festival-btn" class="px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-indigoDeep border border-goldLeaf/30 text-ivorySilk hover:border-marigold transition-colors">
+              ← Previous
+            </button>
+            <span id="modal-counter" class="text-xs text-ivorySilk/60">1 / 8</span>
+            <button id="next-festival-btn" class="px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-gradient-to-r from-saffron to-crimson text-white hover:opacity-95 transition-opacity">
+              Next Festival →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+  <script>
+    /**
+     * Curated dataset of 8 iconic Indian festivals.
+     * Each entry includes a reliable Unsplash photography URL AND a custom bespoke
+     * SVG illustration fallback so imagery is always vivid and never broken.
+     */
+    const FESTIVALS = [
+      {
+        id: 'diwali',
+        name: 'Diwali',
+        subtitle: 'Festival of Lights',
+        category: 'lights-colors',
+        season: 'Autumn (Oct – Nov)',
+        region: 'Pan-India (North, West & Central)',
+        accentColor: '#FFB800',
+        imageUrl: 'https://images.unsplash.com/photo-1574265932292-3d3d43b3c893?auto=format&fit=crop&w=900&q=80',
+        summary: 'Millions of clay diyas, intricate rangolis, and golden fireworks celebrate the triumph of light over darkness and knowledge over ignorance.',
+        story: 'Celebrated over five luminous days, Diwali commemorates Lord Rama’s return to Ayodhya after fourteen years of exile, as well as the worship of Goddess Lakshmi, bestower of prosperity and auspiciousness. Homes are cleansed, adorned with marigold garlands, and illuminated with rows of earthen oil lamps.',
+        traditions: [
+          'Lighting rows of earthen diyas at dusk',
+          'Creating colorful rangoli patterns at thresholds',
+          'Lakshmi Puja & exchanging sweets with loved ones',
+          'Wearing new silk attire and festive sparklers'
+        ],
+        foods: ['Kaju Katli', 'Motichoor Ladoo', 'Gulab Jamun', 'Chakli & Namak Pare'],
+        svgArt: `
+          <svg viewBox="0 0 400 300" class="w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="diwaliGlow" cx="50%" cy="42%" r="55%">
+                <stop offset="0%" stop-color="#FFB800" stop-opacity="0.65"/>
+                <stop offset="55%" stop-color="#FF6B1A" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="#0F0B29" stop-opacity="1"/>
+              </radialGradient>
+            </defs>
+            <rect width="400" height="300" fill="#140E36"/>
+            <rect width="400" height="300" fill="url(#diwaliGlow)"/>
+            <circle cx="200" cy="125" r="95" stroke="#F3C65F" stroke-width="1" stroke-dasharray="4 4" fill="none" opacity="0.5"/>
+            <path d="M200 58 C200 58 172 95 172 118 C172 135 184 146 200 146 C216 146 228 135 228 118 C228 95 200 58 200 58 Z" fill="#FFD166"/>
+            <path d="M200 76 C200 76 184 100 184 116 C184 127 191 135 200 135 C209 135 216 127 216 116 C216 100 200 76 200 76 Z" fill="#FFFFFF"/>
+            <path d="M115 155 C128 205 162 228 200 228 C238 228 272 205 285 155 C245 172 155 172 115 155 Z" fill="#D91E48"/>
+            <path d="M125 160 C165 174 235 174 275 160" stroke="#F3C65F" stroke-width="3" fill="none"/>
+          </svg>`
+      },
+      {
+        id: 'holi',
+        name: 'Holi',
+        subtitle: 'Festival of Colors & Spring',
+        category: 'lights-colors',
+        season: 'Spring (March)',
+        region: 'Pan-India (Mathura, Vrindavan, North India)',
+        accentColor: '#EC4899',
+        imageUrl: 'https://images.unsplash.com/photo-1551887373-3c5bd224f6e2?auto=format&fit=crop&w=900&q=80',
+        summary: 'A joyous explosion of gulal pigments, water splashes, folk music, and forgiveness welcoming the blossoming warmth of spring.',
+        story: 'Rooted in the legend of Prahlada’s unwavering devotion and the playful love of Radha and Krishna in Braj, Holi begins with Holika Dahan—a sacred bonfire symbolizing the burning away of negativity—followed by Rangwali Holi, where social boundaries dissolve under clouds of vibrant color.',
+        traditions: [
+          'Holika Dahan ceremonial bonfire on full-moon eve',
+          'Playful throwing of organic gulal powders',
+          'Singing traditional Braj Holi folk songs & dhol beats',
+          'Sharing festive drinks and warm embraces'
+        ],
+        foods: ['Gujiya', 'Thandai', 'Malpua', 'Dahi Bhalla'],
+        svgArt: `
+          <svg viewBox="0 0 400 300" class="w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="300" fill="#1A103C"/>
+            <circle cx="130" cy="120" r="85" fill="#EC4899" opacity="0.55"/>
+            <circle cx="265" cy="115" r="80" fill="#FFB800" opacity="0.55"/>
+            <circle cx="205" cy="185" r="90" fill="#06B6D4" opacity="0.5"/>
+            <circle cx="195" cy="135" r="55" fill="#FF6B1A" opacity="0.65"/>
+            <circle cx="150" cy="80" r="8" fill="#FFF"/>
+            <circle cx="290" cy="160" r="10" fill="#FFD166"/>
+            <circle cx="110" cy="200" r="12" fill="#F472B6"/>
+          </svg>`
+      },
+      {
+        id: 'eid',
+        name: 'Eid-ul-Fitr',
+        subtitle: 'Festival of Gratitude & Brotherhood',
+        category: 'devotion',
+        season: 'Lunar Calendar (Shawwal)',
+        region: 'Pan-India (Delhi, Hyderabad, Lucknow, Bhopal)',
+        accentColor: '#10B981',
+        imageUrl: 'https://images.unsplash.com/photo-1564121211835-e88c852648ab?auto=format&fit=crop&w=900&q=80',
+        summary: 'Marked by the sighting of the crescent moon, congregational prayers, charitable giving, and aromatic feasts shared in warm hospitality.',
+        story: 'Concluding the sacred fasting month of Ramadan, Eid-ul-Fitr is a celebration of spiritual renewal, empathy, and community solidarity. Families gather at historic mosques in crisp new attire, offer Zakat al-Fitr to support those in need, and open their homes for lavish culinary hospitality.',
+        traditions: [
+          'Chand Raat bazaars filled with bangles and henna',
+          'Morning congregational Eid prayers & warm greetings',
+          'Zakat al-Fitr charitable giving to the community',
+          'Gifting Eidi to children and visiting relatives'
+        ],
+        foods: ['Sheer Khurma', 'Hyderabadi Biryani', 'Sewaiyan', 'Shahi Tukda'],
+        svgArt: `
+          <svg viewBox="0 0 400 300" class="w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="300" fill="#0C1F2E"/>
+            <circle cx="200" cy="130" r="105" fill="#10B981" opacity="0.16"/>
+            <path d="M225 75 A58 58 0 1 0 255 175 A46 46 0 1 1 225 75 Z" fill="#F3C65F"/>
+            <polygon points="252,108 256,119 268,119 258,126 262,137 252,130 242,137 246,126 236,119 248,119" fill="#FFF7CC"/>
+            <path d="M90 250 L90 210 Q145 175 200 210 Q255 175 310 210 L310 250 Z" fill="#134E4A" opacity="0.75"/>
+          </svg>`
+      },
+      {
+        id: 'durga-puja',
+        name: 'Durga Puja',
+        subtitle: 'Grand Festival of Shakti & Artistry',
+        category: 'devotion',
+        season: 'Autumn (Sep – Oct)',
+        region: 'West Bengal, Assam, Odisha & Tripura',
+        accentColor: '#D91E48',
+        imageUrl: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=900&q=80',
+        summary: 'Monumental handcrafted pandals, rhythmic Dhak drums, Sindoor Khela, and artistic devotion celebrating Goddess Durga’s victory over Mahishasura.',
+        story: 'Recognized by UNESCO as Intangible Cultural Heritage, Durga Puja transforms cities like Kolkata into open-air museums of sculpture, architecture, and theater. Over five days, communities honor Goddess Durga as both a fierce protector of cosmic order and a beloved daughter returning home.',
+        traditions: [
+          'Pandal-hopping across thematic artistic installations',
+          'Rhythmic Dhunuchi Naach to resonant Dhak drums',
+          'Pushpanjali floral offerings on Maha Ashtami',
+          'Sindoor Khela & Bijoya Dashami farewell greetings'
+        ],
+        foods: ['Khichuri & Labra', 'Luchi & Kosha Mangsho', 'Roshogolla', 'Sandesh'],
+        svgArt: `
+          <svg viewBox="0 0 400 300" class="w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="300" fill="#230B1E"/>
+            <circle cx="200" cy="145" r="95" fill="#D91E48" opacity="0.25"/>
+            <circle cx="200" cy="145" r="72" stroke="#F3C65F" stroke-width="2" fill="none"/>
+            <path d="M155 140 Q200 112 245 140 Q200 168 155 140 Z" fill="#FFF9F0"/>
+            <circle cx="200" cy="140" r="14" fill="#0F0B29"/>
+            <circle cx="200" cy="108" r="8" fill="#D91E48"/>
+            <path d="M188 92 Q200 104 212 92" stroke="#F3C65F" stroke-width="3" fill="none"/>
+          </svg>`
+      },
+      {
+        id: 'pongal',
+        name: 'Pongal',
+        subtitle: 'Tamil Harvest & Solar Thanksgiving',
+        category: 'harvest',
+        season: 'Winter (January 14–17)',
+        region: 'Tamil Nadu & Puducherry',
+        accentColor: '#F59E0B',
+        imageUrl: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=80',
+        summary: 'Freshly harvested rice boiled
